@@ -1,0 +1,62 @@
+%
+% Copyright (c) 2015, Yarpiz (www.yarpiz.com)
+% All rights reserved. Please read the "license.txt" for license terms.
+%
+% Project Code: YOEA112
+% Project Title: Implementation of Firefly Algorithm (FA) in MATLAB
+% Publisher: Yarpiz (www.yarpiz.com)
+% 
+% Developer: S. Mostapha Kalami Heris (Member of Yarpiz Team)
+% 
+% Contact Info: sm.kalami@gmail.com, info@yarpiz.com
+%
+
+clc;
+clear;
+close all;
+
+%% Problem Definition
+
+nVar=10;                 % Number of Decision Variables
+
+VarSize=[1 nVar];       % Decision Variables Matrix Size
+
+lb = [2 2 2 2 2 2 200 200 200 200];                               % Decision Variables Lower Bound
+ub = [10 10 10 10 10 10 20000 20000 20000 20000];                 % Decision Variables Upper Bound
+
+%% Firefly Algorithm Parameters
+
+MaxIt=100;         % Maximum Number of Iterations
+
+nPop=100;            % Number of Fireflies (Swarm Size)
+
+gamma=1;            % Light Absorption Coefficient
+
+beta0=2;            % Attraction Coefficient Base Value
+
+alpha=0.2;          % Mutation Coefficient
+
+alpha_damp=0.98;    % Mutation Coefficient Damping Ratio
+
+delta=0.05*(ub-lb);     % Uniform Mutation Range
+B=3000;
+m=2;
+
+CostFunction=@(x,ub,lb,B) OBJ(x,ub,lb,B);        % Cost Function
+
+if isscalar(lb) && isscalar(ub)
+    dmax = (ub-lb)*sqrt(nVar);
+else
+    dmax = norm(ub-lb);
+end
+
+
+%% Results
+
+%figure;
+%plot(BestCost,'LineWidth',2);
+plot(BestCost,'LineWidth',2);
+xlabel('Iteration');
+ylabel('Best Cost');
+hold("all");
+grid on;
